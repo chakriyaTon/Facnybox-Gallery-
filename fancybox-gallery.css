@@ -1,0 +1,289 @@
+/* ══════════════════════════════════════════════════════
+   Fancybox UI overrides
+   ══════════════════════════════════════════════════════ */
+
+button.f-button {
+  padding: 0px !important;
+  border-radius: 0px !important;
+  border-width: 0px !important;
+  background-color: #fcfcfc41 !important;
+}
+
+.f-thumbs.is-modern .f-thumbs__slide button {
+  padding: 0px !important;
+  border-radius: 0px !important;
+  border-width: 0px !important;
+  background-color: #fcfcfc41 !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   Base (shared)
+   ══════════════════════════════════════════════════════ */
+
+.fgal-gallery {
+  display: grid;
+  gap: 8px;
+}
+
+.fgal-gallery > a {
+  display: block;
+  overflow: hidden;
+  border-radius: 12px;
+  position: relative;
+  background: #e9ecef;
+}
+
+.fgal-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 12px;
+  cursor: pointer;
+  transition:
+    transform 0.35s ease,
+    filter 0.35s ease;
+}
+
+.fgal-gallery > a:hover img {
+  transform: scale(1.04);
+  filter: brightness(0.88);
+}
+
+/* ══════════════════════════════════════════════════════
+   Badge Button
+   ══════════════════════════════════════════════════════ */
+
+.fgal-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #648ffc;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+  white-space: nowrap;
+  line-height: 1;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.fgal-btn--desktop {
+  display: flex;
+}
+
+.fgal-btn--mobile {
+  display: none;
+}
+
+/* ══════════════════════════════════════════════════════
+   LAYOUT grid — 1 big + 2 small stacked
+   [fgal_gallery]
+   [fgal_gallery layout="grid" rows="2"] → 6 images
+   ══════════════════════════════════════════════════════ */
+
+.fgal-gallery--grid {
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: repeat(2, clamp(150px, 20vw, 235px));
+  align-items: stretch;
+}
+
+.fgal-gallery--grid > a:first-child {
+  grid-row: 1 / 3;
+}
+
+.fgal-gallery--grid > a:nth-child(n + 4) {
+  display: none;
+}
+
+/* rows="2" → show 6 images */
+.fgal-gallery--grid[data-rows="2"] {
+  grid-template-rows: repeat(4, clamp(150px, 20vw, 235px));
+}
+
+.fgal-gallery--grid[data-rows="2"] > a:nth-child(n + 4) {
+  display: block;
+}
+
+.fgal-gallery--grid[data-rows="2"] > a:nth-child(n + 7) {
+  display: none;
+}
+
+/* rows="3" → show 9 images */
+.fgal-gallery--grid[data-rows="3"] {
+  grid-template-rows: repeat(6, clamp(150px, 20vw, 235px));
+}
+
+.fgal-gallery--grid[data-rows="3"] > a:nth-child(n + 4) {
+  display: block;
+}
+
+.fgal-gallery--grid[data-rows="3"] > a:nth-child(n + 10) {
+  display: none;
+}
+
+/* ══════════════════════════════════════════════════════
+   LAYOUT featured — 1 big + 4 small
+   [fgal_gallery layout="featured"]
+   ══════════════════════════════════════════════════════ */
+
+.fgal-gallery--featured {
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: repeat(2, clamp(150px, 20vw, 235px));
+  align-items: stretch;
+}
+
+.fgal-gallery--featured > a:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  height: 100%;
+  align-self: stretch;
+}
+
+.fgal-gallery--featured > a:nth-child(2) {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.fgal-gallery--featured > a:nth-child(3) {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.fgal-gallery--featured > a:nth-child(4) {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.fgal-gallery--featured > a:nth-child(5) {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.fgal-gallery--featured > a:nth-child(n + 6) {
+  display: none;
+}
+
+.fgal-gallery--featured > a img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ══════════════════════════════════════════════════════
+   LAYOUT columns mode
+   [fgal_gallery columns="8" cols="4"]
+   ══════════════════════════════════════════════════════ */
+
+.fgal-gallery[style*="--fgal-cols"] {
+  grid-template-columns: repeat(var(--fgal-cols-row), 1fr) !important;
+  grid-auto-rows: clamp(150px, 20vw, 235px) !important;
+  align-items: stretch;
+}
+
+.fgal-gallery[style*="--fgal-cols"] > a {
+  display: block !important;
+  overflow: hidden;
+}
+
+.fgal-gallery[style*="--fgal-cols"] > a[aria-hidden="true"] {
+  display: none !important;
+}
+
+.fgal-gallery[style*="--fgal-cols"] > a img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.fgal-gallery[style*="--fgal-cols"] > a:first-child {
+  grid-row: auto !important;
+  grid-column: auto !important;
+  height: auto !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   Mobile
+   ══════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  .fgal-gallery {
+    display: grid;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: clamp(220px, 60vw, 360px) !important;
+    grid-auto-rows: 0 !important;
+    gap: 0 !important;
+    overflow: hidden;
+  }
+
+  .fgal-gallery > a:first-child {
+    display: block !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    height: 100% !important;
+  }
+
+  .fgal-gallery > a:not(:first-child) {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  .fgal-gallery > a img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+    border-radius: 12px !important;
+  }
+
+  .fgal-btn--desktop {
+    display: none !important;
+  }
+
+  .fgal-btn--mobile {
+    display: flex !important;
+  }
+
+  .fgal-gallery[style*="--fgal-cols"] {
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: clamp(220px, 60vw, 360px) !important;
+  }
+
+  .fgal-gallery[style*="--fgal-cols"] > a:not(:first-child) {
+    display: none !important;
+  }
+
+  .fgal-gallery--grid,
+  .fgal-gallery--featured {
+    grid-template-columns: 1fr;
+    grid-template-rows: clamp(220px, 55vw, 360px);
+  }
+
+  .fgal-gallery--grid > a:first-child,
+  .fgal-gallery--featured > a:nth-child(1) {
+    grid-column: auto;
+    grid-row: auto;
+    height: auto;
+  }
+
+  .fgal-gallery--grid > a:nth-child(n + 2),
+  .fgal-gallery--featured > a:nth-child(n + 2) {
+    display: none !important;
+  }
+
+}
